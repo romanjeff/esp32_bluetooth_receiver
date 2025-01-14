@@ -270,7 +270,12 @@ static void transmit_command(
     HCI_TRACE_DEBUG("HCI Enqueue Command opcode=0x%x\n", metadata->opcode);
     BTTRC_DUMP_BUFFER(NULL, command->data + command->offset, command->len);
 
-    fixed_pkt_queue_enqueue(hci_host_env.command_queue, linked_pkt, FIXED_PKT_QUEUE_MAX_TIMEOUT);
+    queue_success = fixed_pkt_queue_enqueue(hci_host_env.command_queue, linked_pkt, FIXED_PKT_QUEUE_MAX_TIMEOUT);
+    if (queue_success == TRUE) {
+        HCI_TRACE_DEBUG("HCI queued packet successfully);
+    } else {
+        HCI_TRACE_DEBUG("HCI did not queue packet successfully!!);
+        }
     hci_downstream_data_post(OSI_THREAD_MAX_TIMEOUT);
 
 }

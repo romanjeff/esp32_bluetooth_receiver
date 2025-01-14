@@ -22,7 +22,6 @@
 #endif
 #include "freertos/ringbuf.h"
 
-
 #define RINGBUF_HIGHEST_WATER_LEVEL    (32 * 1024)
 #define RINGBUF_PREFETCH_WATER_LEVEL   (20 * 1024)
 
@@ -124,7 +123,8 @@ static void bt_i2s_task_handler(void *arg)
      * `dma_frame_num * dma_desc_num * i2s_channel_num * i2s_data_bit_width / 8`.
      * Transmit `dma_frame_num * dma_desc_num` bytes to DMA is trade-off.
      */
-    const size_t item_size_upto = 240 * 6;
+    // const size_t item_size_upto = 240 * 6;
+    const size_t item_size_upto = 120 * 6;
     size_t bytes_written = 0;
 
     for (;;) {
@@ -132,7 +132,8 @@ static void bt_i2s_task_handler(void *arg)
             for (;;) {
                 item_size = 0;
                 /* receive data from ringbuffer and write it to I2S DMA transmit buffer */
-                data = (uint8_t *)xRingbufferReceiveUpTo(s_ringbuf_i2s, &item_size, (TickType_t)pdMS_TO_TICKS(20), item_size_upto);
+                data = (uint8_t *)xRingbufferReceiveUpTo(s_ringbuf_i2s, &item_size, (TickType_t)pdMS_TO_TICKS(0), item_size_upto);
+                // data = (uint8_t *)xRingbufferReceiveUpTo(s_ringbuf_i2s, &item_size, (TickType_t)pdMS_TO_TICKS(20), item_size_upto);
                 if (item_size == 0) {
                     ESP_LOGI(BT_APP_CORE_TAG, "ringbuffer underflowed! mode changed: RINGBUFFER_MODE_PREFETCHING");
                     ringbuffer_mode = RINGBUFFER_MODE_PREFETCHING;

@@ -1,7 +1,7 @@
 {
     "version":            "1.1",
     "project_name":       "esp32_bluetooth_receiver",
-    "project_version":    "1",
+    "project_version":    "af262a13-dirty",
     "project_path":       "C:/Users/rjrom/esp32_bluetooth_receiver",
     "idf_path":           "C:/Users/rjrom/esp/v5.4/esp-idf",
     "build_dir":          "C:/Users/rjrom/esp32_bluetooth_receiver/build",

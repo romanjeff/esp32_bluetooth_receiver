@@ -39,7 +39,7 @@
 #define L2CAP_HEADER_SIZE       4
 
 // TODO(zachoverflow): find good value for this
-#define NUMBER_OF_BUCKETS 42
+#define NUMBER_OF_BUCKETS 256
 
 // Our interface and callbacks
 static const packet_fragmenter_t interface;
